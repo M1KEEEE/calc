@@ -4,6 +4,8 @@ from tkinter.ttk import Radiobutton
 euro = 86,79
 dollar = 77,13
 
+def calculate_currency(rate):
+
 def user_choise():
    euro == "1"
    dollar == "2"
