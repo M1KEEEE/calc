@@ -4,14 +4,16 @@ import tkinter as tk
 window = tk.Tk()
 
 def calculate_currency(tr_rate, ent_rate):
-    user_money = int(money_entry.get())
-    tr_rate = tr_rate.get()
-    ent_rate = ent_rate.get()
-    user_money = round(user_money * ent_rate, 2)
-    result = round(user_money / tr_rate, 2)
-    result_label.config(
-        text=result)
-
+	try:
+		int(money_entry.get())
+	except ValueError:
+		mb.showwarning("Некорректная сумма", "Сумма должна быть числом")
+		money_entry.delete(0, "end")
+	else:
+		user_money = int(money_entry.get())
+		rate = rate.get
+		result =round(user_money / rate, 2)
+		result_label.config(text = result)
 
 # параметры окна
 window.title("Калькулятор валют")
@@ -22,7 +24,6 @@ tr_rate = tk.DoubleVar()
 tr_rate.set(75.84)
 ent_rate = tk.DoubleVar()
 ent_rate.set(1.00)
-
 
 
 # виджеты
@@ -66,6 +67,8 @@ ent_label = tk.Label(window,
 money_entry = tk.Entry(window)
 imp_label = tk.Label(window, 
     text="в какую валюту нужно перевести?")
+user_label = tk.Label(window,
+	text="из какой валюты нужно перевести?")
 
 cur_0 = tk.Radiobutton(window, 
     text="доллар США", 
@@ -97,7 +100,7 @@ result_label = tk.Label(
 )
 
 calculate_button = tk.Button(
-    window, 
+    window,
     text="посчитать",
     command=lambda: calculate_currency(tr_rate, ent_rate)
 )
@@ -107,46 +110,54 @@ money_label.grid(
     row=0, 
     column=5)
 user_label.grid(
-    row=1, 
-    column=5)
+    row=0, 
+    column=0)
 ent_0.grid(
-    row=2, 
+    row=1, 
     column=0)
 ent_1.grid(
-    row=3, 
+    row=2, 
     column=0)
 ent_2.grid(
-    row=4, 
+    row=3, 
     column=0)
 ent_3.grid(
-    row=5, 
+    row=4, 
     column=0)
 ent_4.grid(
-    row=6, 
+    row=5, 
     column=0)
 ent_label.grid(
     row=6, 
-    column=0)
-money_entry.grid()
-imp_label.grid()
+    column=1)
+money_entry.grid(
+	row=7,
+	column=1)
+imp_label.grid(
+	row=0,
+	column=5)
 
 cur_0.grid(
-    row=0, 
-    column=5)
-cur_1.grid(
     row=1, 
     column=5)
-cur_2.grid(
+cur_1.grid(
     row=2, 
     column=5)
-cur_3.grid(
+cur_2.grid(
     row=3, 
     column=5)
-cur_4.grid(
+cur_3.grid(
     row=4, 
     column=5)
-calculate_button.grid()
-result_label.grid()
+cur_4.grid(
+    row=5, 
+    column=5)
+calculate_button.grid(
+	row=8,
+	column=1)
+result_label.grid(
+	row=9,
+	column=1)
 
 # запустить главный цикл окна
 window.mainloop()
